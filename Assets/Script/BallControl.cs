@@ -4,81 +4,102 @@ using UnityEngine;
 
 public class BallControl : MonoBehaviour
 {
-    // Titik asal lintasan bola saat ini
-    private Vector2 trajectoryOrigin;
-    // Untuk mengakses informasi titik asal lintasan
+    private Rigidbody2D rb;
+    //public float xInitialForce;
+    //public float yInitialForce;
 
-    // Rigidbody 2D bola
-    private Rigidbody2D rigidBody2D;
+    public float speed;
+    public const string Right = "right";
+    public const string Left = "left";
+    public const string Up = "up";
+    public const string Down = "down";
 
-    // Besarnya gaya awal yang diberikan untuk mendorong bola
-    public float xInitialForce;
-    public float yInitialForce;
-    // Start is called before the first frame update
+    string buttonPressed;
 
-
-    // Ketika bola beranjak dari sebuah tumbukan, rekam titik tumbukan tersebut
-    private void OnCollisionExit2D(Collision2D collision)
+    private void Start()
     {
-        trajectoryOrigin = transform.position;
-    }
-    // Untuk mengakses informasi titik asal lintasan
-    public Vector2 TrajectoryOrigin
-    {
-        get { return trajectoryOrigin; }
-    }
+        rb = GetComponent<Rigidbody2D>();
 
-
-    // Untuk mengakses informasi titik asal lintasan
-
-    void ResetBall()
-    {
-        // Reset posisi menjadi (0,0)
-        transform.position = Vector2.zero;
-
-        // Reset kecepatan menjadi (0,0)
-        rigidBody2D.velocity = Vector2.zero;
-    }
-
-    void PushBall()
-    {
-        // Tentukan nilai komponen y dari gaya dorong antara -yInitialForce dan yInitialForce
-        float yRandomInitialForce = Random.Range(-yInitialForce, yInitialForce);
-
-        // Tentukan nilai acak antara 0 (inklusif) dan 2 (eksklusif)
-        float randomDirection = Random.Range(0, 2);
-
-        // Jika nilainya di bawah 1, bola bergerak ke kiri. 
-        // Jika tidak, bola bergerak ke kanan.
-        if (randomDirection < 1.0f)
-        {
-            // Gunakan gaya untuk menggerakkan bola ini.
-            rigidBody2D.AddForce(new Vector2(-xInitialForce, yRandomInitialForce));
-        }
-        else
-        {
-            rigidBody2D.AddForce(new Vector2(xInitialForce, yRandomInitialForce));
-        }
-    }
-
-    void RestartGame()
-    {
-        // Kembalikan bola ke posisi semula
-        ResetBall();
-
-        // Setelah 2 detik, berikan gaya ke bola
-        Invoke("PushBall", 2);
-    }
-
-    void Start()
-    {
-        trajectoryOrigin = transform.position;
-        rigidBody2D = GetComponent<Rigidbody2D>();
-
-        // Mulai game
         RestartGame();
     }
 
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            buttonPressed = Up;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            buttonPressed = Down;
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            buttonPressed = Left;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            buttonPressed = Right;
+        }
+        else
+        {
+            buttonPressed = null; ;
+        }
+    }
 
+    void FixedUpdate()
+    {
+        if (buttonPressed == Right)
+        {
+            rb.AddForce(new Vector2(speed, 0));
+        }
+        else if (buttonPressed == Left)
+        {
+            rb.AddForce(new Vector2(-speed, 0));
+        }
+        else if (buttonPressed == Up)
+        {
+            rb.AddForce(new Vector2(0, speed));
+        }
+        else if (buttonPressed == Down)
+        {
+            rb.AddForce(new Vector2(0, -speed));
+        }
+        else
+        { }
+    }
 
+    void ResetBall()
+    {
+        //reset posisi circle
+        transform.position = Vector2.zero;
+
+        //reset kecepatan circle
+        rb.velocity = Vector2.zero;
+    }
+
+    //void PushBall()
+    // {
+         //untuk random arah bola
+         //float randomDirection = Random.Range(0,2);
+
+         //Jika nilai random dibawah 1 bola ke kekiri
+         //selain itu bola bergerak kekanan
+        // if(randomDirection < 1.0f)
+         //{
+           //  rb.AddForce(new Vector2(-xInitialForce, -yInitialForce));
+        // }else
+         //{
+           //  rb.AddForce(new Vector2(xInitialForce, yInitialForce));
+        // }
+     //}
+
+    void RestartGame()
+    {
+        //kembali ke posisi semula
+        ResetBall();
+
+        //bola bergerak
+        //Invoke("PushBall", 0.01f);
+    }
 }

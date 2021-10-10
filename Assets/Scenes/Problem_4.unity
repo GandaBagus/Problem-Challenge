@@ -206,7 +206,11 @@ GameObject:
   - component: {fileID: 884677928}
   - component: {fileID: 884677927}
   - component: {fileID: 884677926}
+<<<<<<< Updated upstream
   - component: {fileID: 884677931}
+=======
+  - component: {fileID: 884677930}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: ball
   m_TagString: Untagged
@@ -313,7 +317,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!114 &884677931
+=======
+--- !u!114 &884677930
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -327,6 +335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xInitialForce: 50
   yInitialForce: 15
+<<<<<<< Updated upstream
 --- !u!1 &1147037524
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,3 +794,5 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+=======
+>>>>>>> Stashed changes

@@ -5,13 +5,9 @@ public class BallControl : MonoBehaviour
 {
 
     
-    public float moveSpeed = 0.1f;
+    public float moveSpeed = 5f;
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
+    
 
     // Update is called once per frame
     void Update()
